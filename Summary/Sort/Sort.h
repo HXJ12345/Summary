@@ -12,6 +12,15 @@
 * @author           HXJ
 * @date             2022-03-20
 **/
+
+/****************Summary*********************/
+/*********时间*********空间**********稳定性*****/
+/*选择*****O(N2)*******O(1)**********NO*******/
+/*冒泡*****O(N2)*******O(1)**********YES*******/
+/*归并*****O(NlgN)*****O(N)**********YES*******/
+/*快排*****O(NlgN)*****O(lgN)********NO*******/
+/*堆排*****O(NlgN)*****O(1)**********NO*******/
+
 namespace HXJ {
 
 /**
@@ -79,7 +88,7 @@ void SelectSort(V_ITERRAL begin, V_ITERRAL end)
 template <typename V_ITERRAL>
 static void merge(V_ITERRAL begin, size_t L, size_t M, size_t R)
 {
-    using value_type = std::iterator_traits<V_ITERRAL>::value_type ; //获取到实际数据类型
+    using value_type = typename std::iterator_traits<V_ITERRAL>::value_type ; //获取到实际数据类型
     std::vector<value_type> help;
     help.resize(R - L +1);
 
@@ -210,8 +219,126 @@ void QuickSort(V_ITERRAL begin, V_ITERRAL end)
     QuickProcess(begin, 0, end - begin - 1);
 }
 
+
+/**
+* @function         /
+* @brief            堆上溯算法
+* @date             2022-04-06
+**/
+template <typename V_ITERRAL>
+static void heapUp(V_ITERRAL first, V_ITERRAL last, V_ITERRAL head)
+{
+    if(first != last)
+    {
+        size_t index = last - head;
+        auto parentIndex = (index - 1) / 2;
+        for(auto cur = last; parentIndex >=0 && cur != head; parentIndex = (index - 1) / 2)
+        {
+            auto parent = head + parentIndex; // 获取父亲
+            if(*parent < *cur)
+            {
+                commonswap(*parent , *cur);
+            }
+            else //父亲比当前值大代表不用继续上溯
+            {
+                break;
+            }
+            cur = parent;
+            index = cur - head;
+        }
+    }
 }
 
 
+/**
+* @function         /
+* @brief            堆下溯算法
+* @date             2022-04-06
+**/
+template <typename V_ITERRAL>
+static void heapDown(V_ITERRAL first, V_ITERRAL last, V_ITERRAL head)
+{
+    if(first != last)
+    {
+        auto index = first - head;
+        auto leftChildIndex = index * 2 + 1;
+        for(auto cur = first; leftChildIndex < (last - head + 1) && cur < last; leftChildIndex = index * 2 + 1)
+        {
+            auto child = head + leftChildIndex; //获取左孩子
+            if(((child + 1) <= last) && (*(child + 1) > *child)) //当前右右孩子且右孩子比左孩子大
+            {
+                child = child + 1; //指向左右孩子中大的那个
+            }
+            if(*cur < *child) //如果父亲小于孩子
+            {
+                commonswap(*cur, *child);
+            }
+            cur = child;
+            index = cur - head;
+        }
+    }
+}
+
+/**
+* @function         /
+* @brief            推入堆
+* @date             2022-04-06
+**/
+template <typename V_ITERRAL>
+void pushHeap(V_ITERRAL begin, V_ITERRAL end)
+{
+    heapUp(begin, end - 1, begin);
+}
+
+/**
+* @function         /
+* @brief            弹出堆
+* @date             2022-04-06
+**/
+template <typename V_ITERRAL>
+void popHeap(V_ITERRAL begin, V_ITERRAL end)
+{
+    commonswap(*begin, *(end - 1)); //相当于弹出第一个
+    if(end - begin >= 2)
+    {
+        heapDown(begin, end - 2, begin);  //将剩余的重新构造成堆
+    }
+}
+
+/**
+* @function         /
+* @brief            堆排序
+* @date             2022-04-06
+**/
+template <typename V_ITERRAL>
+void HeapSort(V_ITERRAL begin, V_ITERRAL end)
+{
+    for(auto cur = end; cur != begin; --cur)
+    {
+        popHeap(begin, cur);
+    }
+
+}
+
+
+}
 
 #endif // SORT_H
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

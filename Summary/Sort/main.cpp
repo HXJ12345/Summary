@@ -21,13 +21,14 @@ int main(int argc, char *argv[])
        cout << "*******2 : SelectSort****" << endl;
        cout << "*******3 : MergeSort****" << endl;
        cout << "*******4 : QuickSort****" << endl;
+       cout << "*******5 : HeapSort****" << endl;
 
        cout << "Please select a sorting method: " <<endl;
 
-       qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
+      srand(QTime(0,0,0).secsTo(QTime::currentTime()));
        for(int i=0; i<values.size(); i++)
        {
-           values[i] = qrand()%1000;
+           values[i] = rand()%100000;
            //cout << values[i] << "--";
        }
        cout << endl;
@@ -55,6 +56,11 @@ int main(int argc, char *argv[])
        case 4:
        {
            HXJ::QuickSort(values.begin(), values.end());
+           break;
+       }
+       case 5:
+       {
+           HXJ::HeapSort(values.begin(), values.end());
            break;
        }
        default:
