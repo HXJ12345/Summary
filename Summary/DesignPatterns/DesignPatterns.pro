@@ -8,6 +8,9 @@ CONFIG -= app_bundle
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        Decorator/Decorator.cpp \
+        Decorator/NotDecorator.cpp \
+        Decorator/PerfectDecorator.cpp \
         Observer/Observer.cpp \
         Observer/ObserverExample.cpp \
         Observer/Subject.cpp \
@@ -25,6 +28,7 @@ DISTFILES += \
     Explain
 
 HEADERS += \
+    Decorator/Decorator.h \
     Observer/Observer.h \
     Observer/Subject.h \
     Strategy/Strategy.h \
