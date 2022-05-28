@@ -131,7 +131,7 @@ void PerfectDecoratorProcess()
 }
 
 
-// 1 + n + 1 + m
+//子类个数 1 + n + 1 + m
 
 
 
