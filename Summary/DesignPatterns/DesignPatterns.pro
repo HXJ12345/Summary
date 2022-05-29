@@ -13,9 +13,12 @@ SOURCES += \
         Decorator/Decorator.cpp \
         Decorator/NotDecorator.cpp \
         Decorator/PerfectDecorator.cpp \
+        Factory/Factory.cpp \
+        Factory/NoFactroy.cpp \
         Observer/Observer.cpp \
         Observer/ObserverExample.cpp \
         Observer/Subject.cpp \
+        Prototype/Prototype.cpp \
         Strategy/Strategy.cpp \
         TemplateMethod/Templatemethod.cpp \
         main.cpp \
@@ -32,8 +35,10 @@ DISTFILES += \
 HEADERS += \
     Bridge/Bridge.h \
     Decorator/Decorator.h \
+    Factory/Factory.h \
     Observer/Observer.h \
     Observer/Subject.h \
+    Prototype/Prototype.h \
     Strategy/Strategy.h \
     TemplateMethod/Templatemethod.h
 
